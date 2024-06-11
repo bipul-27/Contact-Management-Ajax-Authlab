@@ -99,6 +99,17 @@ class ContactManagement{
         }
 
     }
+    elseif (isset($_REQUEST['param']) && $_REQUEST['param'] == "delete_contact")
+    {
+        $contact_id = $_REQUEST['contact_id'];
+        $wpdb->delete("{$table_prefix}contact_system", array(
+            "id" => $contact_id  
+        ));
+        echo json_encode(array(
+            "status" => 1,
+            "message" => "Deleted successfully"
+        ));
+    }
     wp_die();
 }
 
