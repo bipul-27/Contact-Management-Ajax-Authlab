@@ -87,6 +87,32 @@ jQuery(document).ready(function() {
     load_contact();
 });
 
+jQuery(document).on("click",".btn-contact-delete",function(){
+    if(confirm("Are you sure want to delete"))
+        {
+            var contact_id= jQuery(this).attr("data-id");
+    var formData = "&action=sms_ajax_handler&param=delete_contact&contact_id="+contact_id;
+    jQuery.ajax({
+        url: sms_ajax_url,
+        data: formData,
+        method: "POST",
+        success: function(response)
+        {
+            var data=jQuery.parseJSON(response);
+            toastr.success(data.message);
+                        setTimeout(function(){
+                            location.reload()
+                        },1000);
+
+        },
+        error: function()
+        {
+
+        }
+    });
+        }
+});
+
 // jQuery(document).ready(function() {
 //     load_contact();
 // });
